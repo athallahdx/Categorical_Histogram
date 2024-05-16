@@ -1,86 +1,44 @@
 const svg = document.getElementById("histogram");
 
+function createRect(x, y, width, height, className) {
+  const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+  rect.setAttribute("x", x);
+  rect.setAttribute("y", y);
+  rect.setAttribute("width", width);
+  rect.setAttribute("height", height);
+  rect.setAttribute("class", className);
+  rect.style.fill = "blue"; // Use CSS to define colors
+  svg.appendChild(rect);
+}
+
+function createText(x, y, textContent, attributes = {}) {
+  const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+  text.setAttribute("x", x);
+  text.setAttribute("y", y);
+  text.textContent = textContent;
+
+  for (const [key, value] of Object.entries(attributes)) {
+    text.setAttribute(key, value);
+  }
+
+  svg.appendChild(text);
+}
+
 function createLine(x1, x2, y1, y2) {
-  const newLine = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "line"
-  );
-  newLine.setAttribute("x1", `${x1}`);
-  newLine.setAttribute("x2", `${x2}`);
-  newLine.setAttribute("y1", `${y1}`);
-  newLine.setAttribute("y2", `${y2}`);
-  newLine.setAttribute("stroke", "black");
-
-  svg.appendChild(newLine);
-}
-
-function createRect(x, y, width, height, text, fill = "blue") {
-  const newRect = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "rect"
-  );
-
-  newRect.setAttribute("x", `${x}`);
-  newRect.setAttribute("y", `${y}`);
-  newRect.setAttribute("width", `${width}`);
-  newRect.setAttribute("height", `${height}`);
-  newRect.setAttribute("fill", `${fill}`);
-
-  // Add class name as a data attribute for rect
-  newRect.setAttribute("data-class", text);
-
-  // Add mouseover event listener to show text on hover
-  newRect.addEventListener("mouseover", function () {
-    createText(x + width / 2, y - 5, text);
-  });
-
-  newRect.addEventListener("mouseout", function () {
-    removeText(text);
-  });
-
-  // Add rect to SVG
-  svg.appendChild(newRect);
-}
-
-function createText(x, y, value = "") {
-  const newText = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "text"
-  );
-
-  newText.setAttribute("x", x);
-  newText.setAttribute("y", y);
-  newText.setAttribute("font-size", "12");
-  newText.setAttribute("fill", "black");
-  newText.textContent = value;
-
-  newText.setAttribute("class", "label");
-
-  svg.appendChild(newText);
-}
-
-function removeText(text) {
-  const labels = svg.querySelectorAll(".label");
-  labels.forEach((label) => {
-    if (label.textContent === text) {
-      svg.removeChild(label);
-    }
-  });
+  const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  line.setAttribute("x1", x1);
+  line.setAttribute("x2", x2);
+  line.setAttribute("y1", y1);
+  line.setAttribute("y2", y2);
+  line.style.stroke = "black"; // Default color
+  svg.appendChild(line);
 }
 
 function removeChild() {
-  const line = svg.querySelectorAll("line");
-  const rect = svg.querySelectorAll("rect");
-  const text = svg.querySelectorAll("text");
-  line.forEach((e) => {
-    svg.removeChild(e);
-  });
-  text.forEach((e) => {
-    svg.removeChild(e);
-  });
-  rect.forEach((e) => {
-    svg.removeChild(e);
-  });
+  while (svg.firstChild) {
+    svg.removeChild(svg.firstChild);
+  }
 }
 
-export { createLine, createRect, createText, removeChild, removeText };
+export { createRect, createText, createLine, removeChild };
+

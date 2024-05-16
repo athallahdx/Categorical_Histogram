@@ -66,6 +66,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .submit:hover{
@@ -92,3 +93,8 @@ input:focus{
     padding: 20px;
     box-shadow: 0 2px 2px 3px rgba(0, 0, 0, 0.1); /* Box shadow for styling */
   }
+
+#histogram-container {
+  overflow-x: auto;
+  width: 100%;
+}
