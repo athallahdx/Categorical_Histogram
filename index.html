@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categorical Histogram</title>
+    <link rel="stylesheet" href="src/css/style.css" />
+    <style>
+      * {
+        border: 1px black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrap">
+        <h2>Input Categorical Data</h2>
+        <a href="#" class="add"> &plus; </a>
+        <a href="#" class="delete"> &minus; </a>
+      </div>
+      <div class="inp-group">
+        <form action="#" id="category">
+
+        </form>
+      </div>
+
+      <div id="svg-container">
+        <svg
+          width="0"
+          height="0"
+          xmlns="http://www.w3.org/2000/svg"
+          id="histogram"
+        ></svg>
+      </div>
+    </div>
+      
+
+    <script type="module" src="src/js/main.js"></script>
+  </body>
+</html>
